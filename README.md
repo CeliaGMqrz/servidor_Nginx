@@ -23,16 +23,16 @@ Tareas para la práctica:
 
 ### Escenario
 
-* Tarea 1: [Escenario]()
+* Tarea 1: [Escenario](https://github.com/CeliaGMqrz/servidor_Nginx/blob/main/t1_escenario.md)
 
 ### Virtualhosting
 
-* Tarea 2: [Virtual Hosting]()
+* Tarea 2: [Virtual Hosting](https://github.com/CeliaGMqrz/servidor_Nginx/blob/main/t2_virtualhosting.md)
 
 ### Mapeo de URL
 
-* Tarea 3, 4 y 5: [Mapeo de URL]()
+* Tarea 3, 4 y 5: [Mapeo de URL](https://github.com/CeliaGMqrz/servidor_Nginx/blob/main/t3_mapeo.md)
 
 ### Autentificación, Autorización y Control de Acceso
 
-* Tarea 6, 7 y 8: [Autentificación, Autorización y Control de Acceso]()
+* Tarea 6, 7 y 8: [Autentificación, Autorización y Control de Acceso](https://github.com/CeliaGMqrz/servidor_Nginx/blob/main/t4_auth.md)
