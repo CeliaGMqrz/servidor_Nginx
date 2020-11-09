@@ -17,7 +17,7 @@ De todas maneras, no todo son ventajas en el uso de nginx frente Apache. Nginx p
 
 Esto implica que a la hora de usar aplicaciones web (cms) sea necesario realizar configuraciones adicionales en el servidor para su correcto funcionamiento.
 
-                        [Más informacion](https://rockcontent.com/es/blog/nginx/)
+[Más informacion](https://rockcontent.com/es/blog/nginx/)
 
 Tareas para la práctica:
 
