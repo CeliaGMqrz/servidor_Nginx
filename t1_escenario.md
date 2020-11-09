@@ -12,19 +12,19 @@ ________________________________________________________________________________
 
 * Creamos la instancia en el cloud y le agregamos una ip flotante.
 
-![instancia.png]()
+![instancia.png](https://github.com/CeliaGMqrz/servidor_Nginx/blob/main/capturas/instancia.png)
 
 La ip flotante es: 172.22.200.152
 
 * Abrimos los puertos 22 y 80. Que necesitaremos para acceder por ssh y para el servidor el http.
 
-![reglas.png]()
+![reglas.png](https://github.com/CeliaGMqrz/servidor_Nginx/blob/main/capturas/reglas.png)
 
 * Añadimos la clave pública del profesor en el fichero authorized_keys
 
 * Probamos el acceso
 
-![acceso.png]()
+![acceso.png](https://github.com/CeliaGMqrz/servidor_Nginx/blob/main/capturas/acceso.png)
 
 #### Instalación de Ngix
 
@@ -48,6 +48,6 @@ apt install nginx
 root@servidor-nginx:/var/www/html# nano index.html 
 ```
 
-![pruebahtml.png]()
+![pruebahtml.png](https://github.com/CeliaGMqrz/servidor_Nginx/blob/main/capturas/pruebahtml.png)
 
 [Tarea 2: Crear virtualhosting](https://github.com/CeliaGMqrz/servidor_Nginx/blob/main/t2_virtualhosting.md)
