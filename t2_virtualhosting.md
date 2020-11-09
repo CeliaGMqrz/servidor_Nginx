@@ -90,14 +90,13 @@ server {
 
 }
 
-
 ```
 
 Creamos los enlaces simbólicos para la carpeta 'sites-enabled' y así activar nuestros virtualhosting, en apache utilizabamos una herramienta pero aquí hay que hacerlo manual.
 
 ```sh
-root@servidor-nginx:~# ln -s /etc/nginx/sites-available/iesgn /etc/nginx/sites-enabled/iesgn
-root@servidor-nginx:~# ln -s /etc/nginx/sites-available/departamentos /etc/nginx/sites-enabled/departamentos
+ln -s /etc/nginx/sites-available/iesgn /etc/nginx/sites-enabled/iesgn
+ln -s /etc/nginx/sites-available/departamentos /etc/nginx/sites-enabled/departamentos
 
 ```
 Comprobamos que está bien configurado con **nginx -t**
