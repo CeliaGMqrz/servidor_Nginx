@@ -1,6 +1,6 @@
 # Servidor Web Nginx
 
-![image.png](https://github.com/CeliaGMqrz/servidor_Nginx/blob/main/capturas/image.png)
+![image.jpg](https://github.com/CeliaGMqrz/servidor_Nginx/blob/main/capturas/image.jpg)
 
 
 **NGINX** es un servidor web open source de alta performance que ofrece el contenido estático de un sitio web de forma rápida y fácil de configurar. Ofrece recursos de equilibrio de carga, proxy inverso y streaming, además de gestionar miles de conexiones simultáneas. El resultado de sus aportes es una mayor velocidad y escalabilidad.
