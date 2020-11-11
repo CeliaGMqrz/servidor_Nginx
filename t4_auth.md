@@ -165,14 +165,166 @@ Red local:
 
 * **Tarea 7 (1 punto): Autentificación básica. Limita el acceso a la URL departamentos.iesgn.org/secreto. Comprueba las cabeceras de los mensajes HTTP que se intercambian entre el servidor y el cliente.**
 
+Creamos el direcotorio secreto en departamentos y le añadimos un index.html
+
+```sh
+root@servidor-nginx:/home/debian# mkdir /srv/www/departamentos/secreto
+root@servidor-nginx:/home/debian# cd /srv/www/departamentos/
+root@servidor-nginx:/srv/www/departamentos# ls
+index.html  internet  intranet	secreto
+root@servidor-nginx:/srv/www/departamentos# cp index.html secreto/
+root@servidor-nginx:/srv/www/departamentos# cd secreto/
+root@servidor-nginx:/srv/www/departamentos/secreto# ls
+index.html
+root@servidor-nginx:/srv/www/departamentos/secreto# nano index.html 
+
+```
+Configuramos nuestro fichero de configuracion de 'departamentos' y le añadimos la opción de autentificación básica.
+
+```sh
+# Default server configuration
+
+server {
+        listen 80;
+
+        root /srv/www/departamentos;
+
+        # Add index.php to the list if you are using PHP
+        index index.html index.htm index.nginx-debian.html;
+
+        server_name departamentos.iesgn.org;
+
+        location / {
+                # First attempt to serve request as file, then
+                # as directory, then fall back to displaying a 404.
+                try_files $uri $uri/ =404;
+        }
+
+        location /intranet {
+                allow 10.0.0.6/24;
+                deny all;
+        }
+
+        location /internet {
+                allow 172.23.0.0/16;
+                deny all;
+        }
+
+        location /secreto {
+                auth_basic "Zona de control";
+                auth_basic_user_file /srv/.htpasswd;
+        }
+}
+
+```
+Ahora comprobamos que desde nuestra máquina física nos pide usuario y contraseña
 
 
+![secreto1.png](https://github.com/CeliaGMqrz/servidor_Nginx/blob/main/capturas/secreto1.png)
 
 
+![secreto2.png](https://github.com/CeliaGMqrz/servidor_Nginx/blob/main/capturas/secreto2.png)
 
 
+Vemos las cabeceras http con el comando **curl**
 
+```sh
+celiagm@debian:~/github/servidor_Nginx$ curl -I departamentos.iesgn.org/secreto
+HTTP/1.1 401 Unauthorized
+Server: nginx/1.14.2
+Date: Wed, 11 Nov 2020 13:24:34 GMT
+Content-Type: text/html
+Content-Length: 195
+Connection: keep-alive
+WWW-Authenticate: Basic realm="Zona de control"
 
+```
+Vemos las cabeceras http con el comando **wget**
 
+```sh
+celiagm@debian:~/github/servidor_Nginx$ wget -S departamentos.iesgn.org/secreto
+--2020-11-11 14:26:09--  http://departamentos.iesgn.org/secreto
+Resolviendo departamentos.iesgn.org (departamentos.iesgn.org)... 172.22.200.152
+Conectando con departamentos.iesgn.org (departamentos.iesgn.org)[172.22.200.152]:80... conectado.
+Petición HTTP enviada, esperando respuesta... 
+  HTTP/1.1 401 Unauthorized
+  Server: nginx/1.14.2
+  Date: Wed, 11 Nov 2020 13:26:09 GMT
+  Content-Type: text/html
+  Content-Length: 195
+  Connection: keep-alive
+  WWW-Authenticate: Basic realm="Zona de control"
+
+La autentificación usuario/contraseña falló.
+
+```
 
 * **Tarea 8 (2 punto): Vamos a combinar el control de acceso (tarea 6) y la autentificación (tarea 7), y vamos a configurar el virtual host para que se comporte de la siguiente manera: el acceso a la URL departamentos.iesgn.org/secreto se hace forma directa desde la intranet, desde la red pública te pide la autentificación. Muestra el resultado al profesor.**
+
+Para ello debemos modificar el fichero de configuración de departaentos en el servidor:
+
+Añadimos estas dos líneas:
+
+```sh
+
+                satisfy any;
+                allow 10.0.0.6/24;
+
+```
+De forma que con la directiva **safisfy any** se concede el acceso si un cliente cumple al menos una condición. Es decir se le permite el acceso al cliente pero se le pide autentificación al resto.
+
+Quedaría tal que así:
+
+```sh
+
+# Default server configuration
+
+server {
+        listen 80;
+
+        root /srv/www/departamentos;
+
+        # Add index.php to the list if you are using PHP
+        index index.html index.htm index.nginx-debian.html;
+
+        server_name departamentos.iesgn.org;
+
+        location / {
+                # First attempt to serve request as file, then
+                # as directory, then fall back to displaying a 404.
+                try_files $uri $uri/ =404;
+        }
+
+        location /intranet {
+                allow 10.0.0.6/24;
+                deny all;
+        }
+
+        location /internet {
+                allow 172.23.0.0/16;
+                deny all;
+        }
+
+        location /secreto {
+                satisfy any;
+                allow 10.0.0.6/24;
+                auth_basic "Zona de control";
+                auth_basic_user_file /srv/.htpasswd;
+        }
+}
+
+```
+
+Vemos que que desde fuera nos pide autentificación. 
+
+Para que se pueda probar la autentificacion el usuario es **servidor** y la contraseña es **servidor1**.
+
+
+![secreto3.png](https://github.com/CeliaGMqrz/servidor_Nginx/blob/main/capturas/secreto3.png)
+
+![secreto4.png](https://github.com/CeliaGMqrz/servidor_Nginx/blob/main/capturas/secreto4.png)
+
+
+Aquí vemos que desde fuera nos pide la autentifición y desde la intranet nos deja entrar sin autentificación.
+
+![secreto5.png](https://github.com/CeliaGMqrz/servidor_Nginx/blob/main/capturas/secreto5.png)
