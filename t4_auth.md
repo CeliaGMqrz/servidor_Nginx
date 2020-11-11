@@ -279,6 +279,9 @@ Añadimos estas dos líneas:
                 allow 10.0.0.6/24;
 
 ```
+
+**NOTA**!!!!: Le hemos permitido el acceso sólo a una máquina que es la máquina cliente conectada a la red local. Pero si ponemos el direccionamiento 10.0.0.0/24 se lo permitimos a cualquier máquina dentro de esa red sin autentificación.
+
 De forma que con la directiva **safisfy any** se concede el acceso si un cliente cumple al menos una condición. Es decir se le permite el acceso al cliente pero se le pide autentificación al resto.
 
 Quedaría tal que así:
@@ -322,6 +325,10 @@ server {
 }
 
 ```
+
+
+
+
 
 Vemos que que desde fuera nos pide autentificación. 
 
