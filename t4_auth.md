@@ -156,10 +156,12 @@ ff02::3 ip6-allhosts
 
 6. Comprobamos que podemos acceder desde el exterior con la red pública a 'internet' pero no desde el interior por la red local.
 
-Red pública:
+* Red pública:
+
 ![internet_publica.png](https://github.com/CeliaGMqrz/servidor_Nginx/blob/main/capturas/internet_publica.png)
 
-Red local: 
+* Red local: 
+
 ![internet_cliente.png](https://github.com/CeliaGMqrz/servidor_Nginx/blob/main/capturas/internet_cliente.png)
 
 
