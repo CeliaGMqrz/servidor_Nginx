@@ -181,7 +181,13 @@ index.html
 root@servidor-nginx:/srv/www/departamentos/secreto# nano index.html 
 
 ```
-Configuramos nuestro fichero de configuracion de 'departamentos' y le añadimos la opción de autentificación básica.
+Creamos el fichero .htpasswd con el paquete **apache2-utils** en el directorio /srv
+
+```sh
+htpasswd -cb .htpasswd servidor servidor1
+```
+
+Configuramos nuestro fichero de configuracion de 'departamentos' y le añadimos la opción de autentificación básica. Apuntamos al fichero /srv/.htpasswd donde tenemos el usuario (servidor) y la contraseña (servidor1) que hemos configurado previamente.
 
 ```sh
 # Default server configuration
