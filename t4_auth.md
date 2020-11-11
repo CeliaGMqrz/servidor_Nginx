@@ -276,13 +276,12 @@ Añadimos estas dos líneas:
 ```sh
 
                 satisfy any;
-                allow 10.0.0.6/24;
+                allow 10.0.0.0/24;
 
 ```
 
-**NOTA**!!!!: Le hemos permitido el acceso sólo a una máquina que es la máquina cliente conectada a la red local. Pero si ponemos el direccionamiento 10.0.0.0/24 se lo permitimos a cualquier máquina dentro de esa red sin autentificación.
 
-De forma que con la directiva **safisfy any** se concede el acceso si un cliente cumple al menos una condición. Es decir se le permite el acceso al cliente pero se le pide autentificación al resto.
+De forma que con la directiva **safisfy any** se concede el acceso si un cliente cumple al menos una condición. Es decir se le permite el acceso al cliente y al resto de máquinas que estén conectadas a la red interna, pero se le pide autentificación al resto.
 
 Quedaría tal que así:
 
@@ -318,7 +317,7 @@ server {
 
         location /secreto {
                 satisfy any;
-                allow 10.0.0.6/24;
+                allow 10.0.0.0/24;
                 auth_basic "Zona de control";
                 auth_basic_user_file /srv/.htpasswd;
         }
